@@ -12,9 +12,8 @@ main {
 #feed {}
 
 .post {
-    border-style: solid;
-    margin: .5em;
-    padding: .5em;
+    border-top: 1px solid #ccc;
+    padding: .5em 1em;
 }
 
 /*Popup*/
