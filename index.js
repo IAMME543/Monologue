@@ -17,7 +17,7 @@ closePopup.addEventListener('click', () => {
 const storeName = "posts";
 
 let db;
-const request = indexedDB.open("MyTestDatabase", 2);
+const request = indexedDB.open("MyTestDatabase", 3);
 request.onerror = (event) => {
     console.error("Why didn't you allow my web app to use IndexedDB?!");
 };
@@ -56,6 +56,8 @@ request.onupgradeneeded = (event) => {
 
 function addPost(data) {
     popup.style.display = 'none';
+    postIn.value = "";
+    addToFeed(data)
     if (data.Body == "") {
         return
     }
@@ -89,13 +91,16 @@ function getAllPosts() {
 function setFeed(posts) {
     console.log(posts)
     posts.forEach(postData => {
-        postContainer = document.createElement('div');
-        postContainer.classList.add('post');
-
-        postContent = document.createElement('p');
-        postContent.textContent = postData.Body;
-        postContainer.append(postContent);
-
-        feed.append(postContainer);
+        addToFeed(postData)
     });
+}
+function addToFeed(postData) {
+    postContainer = document.createElement('div');
+    postContainer.classList.add('post');
+
+    postContent = document.createElement('p');
+    postContent.textContent = postData.Body;
+    postContainer.append(postContent);
+
+    feed.prepend(postContainer);
 }
