@@ -140,7 +140,6 @@ function addToFeed(postData) {
     postContainer.classList.add('post');
 
     html = postData.Body.replace('\n', ' <br> ');
-    console.log(html)
     postContent = document.createElement('p');
     postContent.innerHTML = html;
     postContainer.append(postContent);
@@ -153,6 +152,14 @@ function addToFeed(postData) {
         tempDiv.append(postImage);
         postContainer.append(tempDiv);
     }
+    const date = new Date(postData.createdAt)
+    const options = { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' };
+    const formatted = date.toLocaleString('en-US', options);
+
+    const dateP = document.createElement('p')
+    dateP.innerHTML = formatted;
+    dateP.classList.add('date')
+    postContainer.append(dateP);
 
 
     feed.prepend(postContainer);

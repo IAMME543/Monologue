@@ -21,6 +21,12 @@ img {
     padding: .5em 1em;
 }
 
+.date {
+    font-size: 0.8em;
+    color: gray;
+    text-align: right;
+}
+
 /*Popup*/
 #popup {
     display: none;
