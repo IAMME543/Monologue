@@ -12,9 +12,9 @@ img {
     height: 40vh;
 }
 
-
-
-#feed {}
+#imageInput {
+    display: none;
+}
 
 .post {
     border-top: 1px solid #ccc;
@@ -41,10 +41,19 @@ img {
     padding: 1em;
     display: inherit;
     flex-direction: column;
+
+    border-radius: 1em;
+    border: solid #ccc;
 }
 
 .popupContent>div {
     position: relative;
+}
+
+#imgWrap {
+    display: flex;
+    justify-content: center;
+    margin: .5em 0;
 }
 
 #popup button {
@@ -59,12 +68,18 @@ img {
 
 #popup textarea {
     width: 40vw;
-    height: 30vh;
+    height: 45vh;
+    margin-bottom: 1em;
+    resize: none;
 }
 
 #popup img {
     max-height: 40vh;
     width: fit-content;
+}
+
+#popup svg {
+    vertical-align: middle;
 }
 
 /*Header*/
@@ -94,4 +109,25 @@ header button {
 
 button:hover {
     cursor: pointer;
+}
+
+/*Mobile Adjustments*/
+@media (max-aspect-ratio: 1/1) {
+    main {
+        width: 100vw;
+    }
+
+    header button {
+        margin-right: 1em;
+    }
+
+    #popup textarea {
+        width: 80vw;
+        height: 30vh;
+        margin-top: 1em;
+    }
+
+    .popupContent {
+        flex-direction: column-reverse;
+    }
 }
