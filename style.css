@@ -8,6 +8,10 @@ main {
     width: 50vw;
 }
 
+img {
+    width: 80%
+}
+
 
 
 #feed {}
@@ -29,11 +33,14 @@ main {
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    flex-direction: column;
 }
 
 .popupContent {
     background-color: rgb(250, 250, 250);
     padding: 1em;
+    display: inherit;
+    flex-direction: column;
 }
 
 .popupContent>div {
@@ -45,7 +52,6 @@ main {
     background-color: transparent;
 }
 
-
 #close {
     right: 0;
     position: absolute;
@@ -54,6 +60,11 @@ main {
 #popup textarea {
     width: 40vw;
     height: 30vh;
+}
+
+#popup img {
+    max-height: 40vh;
+    width: fit-content;
 }
 
 /*Header*/

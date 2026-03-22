@@ -5,7 +5,11 @@ const feed = document.getElementById('feed');
 //popup elements
 const createPost = document.getElementById('StartCreatePost');
 const closePopup = document.getElementById('close');
+const imgUpload = document.getElementById('imageInput');
 const popup = document.getElementById('popup');
+
+
+let image;
 
 createPost.addEventListener('click', () => {
     popup.style.display = 'flex';
@@ -13,6 +17,28 @@ createPost.addEventListener('click', () => {
 closePopup.addEventListener('click', () => {
     popup.style.display = 'none';
 })
+
+imageInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        const existing = document.getElementById('imgPreview');
+        if (existing != null) {
+            existing.remove();
+        }
+        const preview = document.createElement('img');
+        preview.id = 'imgPreview'
+        preview.src = e.target.result;
+        popup.firstElementChild.prepend(preview);
+
+        image = e;
+    };
+    reader.readAsDataURL(file);
+
+})
+
 
 const storeName = "posts";
 
@@ -30,11 +56,12 @@ request.onsuccess = (event) => {
     };
 
     getAllPosts().then(posts => {
+
         setFeed(posts);
     })
 
     postButton.addEventListener('click', () => addPost({
-        Body: postIn.value, createdAt: Date.now()
+        Body: postIn.value, Image: image, createdAt: Date.now()
     }))
 };
 
@@ -101,6 +128,16 @@ function addToFeed(postData) {
     postContent = document.createElement('p');
     postContent.textContent = postData.Body;
     postContainer.append(postContent);
+    if (postData.Image) {
+        tempDiv = document.createElement('div');
+        tempDiv.style.textAlign = "center";
+
+        postImage = document.createElement('img');
+        postImage.src = URL.createObjectURL(postData.Image);
+        tempDiv.append(postImage)
+        postContainer.append(tempDiv);
+    }
+
 
     feed.prepend(postContainer);
 }
