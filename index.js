@@ -30,7 +30,6 @@ request.onsuccess = (event) => {
     };
 
     getAllPosts().then(posts => {
-        popup.style.display = 'none';
         setFeed(posts);
     })
 
@@ -56,6 +55,7 @@ request.onupgradeneeded = (event) => {
 };
 
 function addPost(data) {
+    popup.style.display = 'none';
     console.log(data)
     const transaction = db.transaction(storeName, "readwrite");
     const store = transaction.objectStore(storeName);

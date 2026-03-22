@@ -21,7 +21,6 @@ main {
 #popup {
     display: none;
     position: fixed;
-    /* stays in viewport */
     top: 0;
     left: 0;
     width: 100%;
@@ -42,6 +41,11 @@ main {
     background-color: transparent;
 }
 
+#popup textarea {
+    width: 40vw;
+    height: 30vh;
+}
+
 /*Header*/
 header {
     display: flex;
@@ -49,6 +53,7 @@ header {
     justify-content: center;
     /* keeps h1 centered */
     position: relative;
+    margin-bottom: 1em;
 }
 
 header h1 {
