@@ -56,6 +56,9 @@ request.onupgradeneeded = (event) => {
 
 function addPost(data) {
     popup.style.display = 'none';
+    if (data.Body == "") {
+        return
+    }
     console.log(data)
     const transaction = db.transaction(storeName, "readwrite");
     const store = transaction.objectStore(storeName);
