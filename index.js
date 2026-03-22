@@ -33,7 +33,7 @@ imageInput.addEventListener('change', (event) => {
         preview.src = e.target.result;
         popup.firstElementChild.prepend(preview);
 
-        image = e;
+        image = e.target.result;
     };
     reader.readAsDataURL(file);
 
@@ -43,7 +43,7 @@ imageInput.addEventListener('change', (event) => {
 const storeName = "posts";
 
 let db;
-const request = indexedDB.open("MyTestDatabase", 3);
+const request = indexedDB.open("MyTestDatabase", 4);
 request.onerror = (event) => {
     console.error("Why didn't you allow my web app to use IndexedDB?!");
 };
@@ -70,12 +70,12 @@ request.onupgradeneeded = (event) => {
     const db = event.target.result;
 
 
-    if (db.objectStoreNames.contains(storeName)) {
-        db.deleteObjectStore(storeName); // Delete the object store
-        console.log(`Object store '${storeName}' deleted successfully.`);
-    } else {
-        console.log(`Object store '${storeName}' not found.`);
-    }
+    // if (db.objectStoreNames.contains(storeName)) {
+    //     db.deleteObjectStore(storeName); // Delete the object store
+    //     console.log(`Object store '${storeName}' deleted successfully.`);
+    // } else {
+    //     console.log(`Object store '${storeName}' not found.`);
+    // }
 
     // Create an objectStore for this database
     const objectStore = db.createObjectStore(storeName, { keyPath: "id", autoIncrement: true });
@@ -84,6 +84,13 @@ request.onupgradeneeded = (event) => {
 function addPost(data) {
     popup.style.display = 'none';
     postIn.value = "";
+    imageInput.value = "";
+    image = "";
+    const existing = document.getElementById('imgPreview');
+    if (existing != null) {
+        existing.remove();
+    }
+
     addToFeed(data)
     if (data.Body == "") {
         return
@@ -133,7 +140,7 @@ function addToFeed(postData) {
         tempDiv.style.textAlign = "center";
 
         postImage = document.createElement('img');
-        postImage.src = URL.createObjectURL(postData.Image);
+        postImage.src = postData.Image;
         tempDiv.append(postImage)
         postContainer.append(tempDiv);
     }
