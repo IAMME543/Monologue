@@ -37,6 +37,9 @@ img {
     padding: 1em;
     display: inherit;
     flex-direction: column;
+
+    border-radius: 1em;
+    border: solid #ccc;
 }
 
 .popupContent>div {
@@ -55,7 +58,8 @@ img {
 
 #popup textarea {
     width: 40vw;
-    height: 30vh;
+    height: 45vh;
+    margin-bottom: 1em;
 }
 
 #popup img {
@@ -100,5 +104,15 @@ button:hover {
 
     header button {
         margin-right: 1em;
+    }
+
+    #popup textarea {
+        width: 80vw;
+        height: 30vh;
+        margin-top: 1em;
+    }
+
+    .popupContent {
+        flex-direction: column-reverse;
     }
 }
