@@ -28,14 +28,17 @@ imageInput.addEventListener('change', (event) => {
 
     const reader = new FileReader();
     reader.onload = (e) => {
-        const existing = document.getElementById('imgPreview');
+        const existing = document.getElementById('imgWrap');
         if (existing != null) {
             existing.remove();
         }
+        const imgWrap = document.createElement('div');
         const preview = document.createElement('img');
         preview.id = 'imgPreview'
         preview.src = e.target.result;
-        popup.firstElementChild.prepend(preview);
+        imgWrap.id = 'imgWrap'
+        imgWrap.append(preview);
+        popup.firstElementChild.prepend(imgWrap);
 
         image = e.target.result;
     };

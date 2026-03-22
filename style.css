@@ -50,6 +50,12 @@ img {
     position: relative;
 }
 
+#imgWrap {
+    display: flex;
+    justify-content: center;
+    margin: .5em 0;
+}
+
 #popup button {
     border: none;
     background-color: transparent;
@@ -64,6 +70,7 @@ img {
     width: 40vw;
     height: 45vh;
     margin-bottom: 1em;
+    resize: none;
 }
 
 #popup img {
