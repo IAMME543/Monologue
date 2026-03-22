@@ -6,6 +6,7 @@ const feed = document.getElementById('feed');
 const createPost = document.getElementById('StartCreatePost');
 const closePopup = document.getElementById('close');
 const imgUpload = document.getElementById('imageInput');
+const imgBtn = document.getElementById('imageBtn');
 const popup = document.getElementById('popup');
 
 
@@ -18,6 +19,9 @@ closePopup.addEventListener('click', () => {
     popup.style.display = 'none';
 })
 
+imgBtn.addEventListener('click', () => {
+    imageInput.click();
+})
 imageInput.addEventListener('change', (event) => {
     const file = event.target.files[0];
     if (!file) return;

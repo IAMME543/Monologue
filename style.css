@@ -12,6 +12,10 @@ img {
     height: 40vh;
 }
 
+#imageInput {
+    display: none;
+}
+
 .post {
     border-top: 1px solid #ccc;
     padding: .5em 1em;
@@ -65,6 +69,10 @@ img {
 #popup img {
     max-height: 40vh;
     width: fit-content;
+}
+
+#popup svg {
+    vertical-align: middle;
 }
 
 /*Header*/
