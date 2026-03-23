@@ -130,7 +130,7 @@ button:hover {
     }
 
     header button {
-        margin-right: 1em;
+        margin-right: .5em;
     }
 
     #popup textarea {
