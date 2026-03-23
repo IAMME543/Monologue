@@ -1,0 +1,18 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Monologue",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Monologue",
+  "start_url": "https://monologue.page/",
+  "theme_color": "#ffffff",
+  "id": "monologue",
+  "description": "A private, local, chronological personal microblog style journal app.",
+  "lang": "en",
+  "categories": [
+    "lifestyle",
+    "utilities"
+  ]
+}
