@@ -1,2 +1,2 @@
 # Monologue
-A private, local, chronological personal microblog style notes app.
+A private, local, chronological personal microblog style journal app.
