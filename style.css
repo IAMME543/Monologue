@@ -21,6 +21,12 @@ img {
     padding: .5em 1em;
 }
 
+.date {
+    font-size: 0.8em;
+    color: gray;
+    text-align: right;
+}
+
 /*Popup*/
 #popup {
     display: none;
@@ -71,6 +77,11 @@ img {
     height: 45vh;
     margin-bottom: 1em;
     resize: none;
+
+}
+
+#popup textarea:focus {
+    outline: none;
 }
 
 #popup img {

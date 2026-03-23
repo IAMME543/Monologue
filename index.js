@@ -139,8 +139,9 @@ function addToFeed(postData) {
     postContainer = document.createElement('div');
     postContainer.classList.add('post');
 
+    html = postData.Body.replace('\n', ' <br> ');
     postContent = document.createElement('p');
-    postContent.textContent = postData.Body;
+    postContent.innerHTML = html;
     postContainer.append(postContent);
     if (postData.Image) {
         tempDiv = document.createElement('div');
@@ -148,9 +149,17 @@ function addToFeed(postData) {
 
         postImage = document.createElement('img');
         postImage.src = postData.Image;
-        tempDiv.append(postImage)
+        tempDiv.append(postImage);
         postContainer.append(tempDiv);
     }
+    const date = new Date(postData.createdAt)
+    const options = { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' };
+    const formatted = date.toLocaleString('en-US', options);
+
+    const dateP = document.createElement('p')
+    dateP.innerHTML = formatted;
+    dateP.classList.add('date')
+    postContainer.append(dateP);
 
 
     feed.prepend(postContainer);
