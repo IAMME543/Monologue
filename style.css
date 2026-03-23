@@ -77,6 +77,11 @@ img {
     height: 45vh;
     margin-bottom: 1em;
     resize: none;
+
+}
+
+#popup textarea:focus {
+    outline: none;
 }
 
 #popup img {
