@@ -102,7 +102,7 @@ function addPost(data) {
     if (data.Body == "") {
         return
     }
-    console.log(data)
+    //console.log(data)
     const transaction = db.transaction(storeName, "readwrite");
     const store = transaction.objectStore(storeName);
 
@@ -130,7 +130,7 @@ function getAllPosts() {
 }
 
 function setFeed(posts) {
-    console.log(posts)
+    //console.log(posts)
     posts.forEach(postData => {
         addToFeed(postData)
     });
