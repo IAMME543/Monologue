@@ -139,7 +139,7 @@ function addToFeed(postData) {
     postContainer = document.createElement('div');
     postContainer.classList.add('post');
 
-    html = postData.Body.replace('\n', ' <br> ');
+    html = postData.Body.replace(/\r?\n/g, ' <br> ');
     postContent = document.createElement('p');
     postContent.innerHTML = html;
     postContainer.append(postContent);

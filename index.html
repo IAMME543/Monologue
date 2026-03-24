@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monologue</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="/assets/Monologue-icon.svg" type="image/x-icon">
+    <link rel="manifest" href="manifest.json">
 </head>
 
 <body>
@@ -14,6 +16,7 @@
         <button id="StartCreatePost">+</button>
     </header>
     <main>
+
         <div id="popup">
             <div class="popupContent">
                 <textarea id="postIn"></textarea>
@@ -33,6 +36,11 @@
         <div id="feed"></div>
 
         <script src="/index.js"></script>
+        <script>
+            if (typeof navigator.serviceWorker !== 'undefined') {
+                navigator.serviceWorker.register('pwabuilder-sw.js')
+            }
+        </script>
     </main>
 
 </body>

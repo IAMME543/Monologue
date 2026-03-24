@@ -25,6 +25,7 @@ img {
     font-size: 0.8em;
     color: gray;
     text-align: right;
+    margin-top: 0px;
 }
 
 /*Popup*/
@@ -129,7 +130,7 @@ button:hover {
     }
 
     header button {
-        margin-right: 1em;
+        margin-right: .5em;
     }
 
     #popup textarea {
