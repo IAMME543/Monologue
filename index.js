@@ -138,11 +138,14 @@ function setFeed(posts) {
 function addToFeed(postData) {
     postContainer = document.createElement('div');
     postContainer.classList.add('post');
+    feed.prepend(postContainer);
 
+    //content
     html = postData.Body.replace(/\r?\n/g, ' <br> ');
     postContent = document.createElement('p');
     postContent.innerHTML = html;
     postContainer.append(postContent);
+    //Images
     if (postData.Image) {
         tempDiv = document.createElement('div');
         tempDiv.style.textAlign = "center";
@@ -152,15 +155,29 @@ function addToFeed(postData) {
         tempDiv.append(postImage);
         postContainer.append(tempDiv);
     }
+
+    const bottomDiv = document.createElement('div');
+    bottomDiv.classList.add('bottomDiv');
+    postContainer.append(bottomDiv);
+    //timestamp
     const date = new Date(postData.createdAt)
     const options = { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' };
     const formatted = date.toLocaleString('en-US', options);
 
     const dateP = document.createElement('p')
     dateP.innerHTML = formatted;
-    dateP.classList.add('date')
-    postContainer.append(dateP);
+    dateP.classList.add('date');
+    bottomDiv.append(dateP)
+
+    //hamburger menu
+    const hamburger = document.createElement('button');
+    hamburger.classList.add('hamburger')
+    bottomDiv.append(hamburger)
+    hamburger.innerHTML = "..."
 
 
-    feed.prepend(postContainer);
+
+
+
+
 }

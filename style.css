@@ -28,6 +28,11 @@ img {
     margin-top: 0px;
 }
 
+.bottomDiv {
+    display: flex;
+    justify-content: flex-end;
+}
+
 /*Popup*/
 #popup {
     display: none;
@@ -63,9 +68,10 @@ img {
     margin: .5em 0;
 }
 
-#popup button {
+button {
     border: none;
     background-color: transparent;
+    vertical-align: middle;
 }
 
 #close {
