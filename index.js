@@ -8,6 +8,7 @@ const closePopup = document.getElementById('close');
 const imgUpload = document.getElementById('imageInput');
 const imgBtn = document.getElementById('imageBtn');
 const popup = document.getElementById('popup');
+const hamburgerMenu = document.getElementById('hamburgerMenu');
 
 
 let image;
@@ -175,9 +176,18 @@ function addToFeed(postData) {
     bottomDiv.append(hamburger)
     hamburger.innerHTML = "..."
 
+    document.querySelectorAll('.hamburger').forEach(btn => {
+        btn.addEventListener('click', () => {
+            openMenu(btn);
+        })
+    })
+}
 
+function openMenu(btn) {
+    console.log(btn);
+    const rect = btn.getBoundingClientRect();
 
-
-
-
+    hamburgerMenu.style.top = `${rect.bottom + window.scrollY}px`;
+    hamburgerMenu.style.left = `${rect.left + window.scrollX}px`;
+    hamburgerMenu.style.display = 'flex'
 }
