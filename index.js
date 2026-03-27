@@ -32,6 +32,8 @@ remove.addEventListener('click', () => {
     postData = hamburgerMenu.selectedPost.postData;
     postData.visible = false;
     setPost(postData)
+    hamburgerMenu.selectedPost.remove();
+    hamburgerMenu.style.display = 'none'
 })
 
 
@@ -167,13 +169,6 @@ function setPost(data) {
 
     updateRequest.onerror = () => {
         console.error("Update failed");
-    };
-
-    transaction.oncomplete = () => {
-        getAllPosts().then(posts => {
-            setFeed(posts);
-        })
-
     };
 };
 function setFeed(posts) {
