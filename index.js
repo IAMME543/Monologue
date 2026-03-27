@@ -13,6 +13,25 @@ const hamburgerMenu = document.getElementById('hamburgerMenu');
 
 let image;
 
+const copy = document.getElementById('copy');
+const remove = document.getElementById('remove');
+const edit = document.getElementById('edit');
+
+copy.addEventListener('click', () => {
+    //TODO: Add image support, could just add img tag to the object containing the content
+    const content = hamburgerMenu.selectedPost.querySelector(':scope > p').innerHTML
+
+    const htmlBlob = new Blob([content], { type: "text/html" });
+    const plainBlob = new Blob([content], { type: "text/plain" });
+    const clipboardItem = new ClipboardItem({
+        "text/html": htmlBlob,
+        "text/plain": plainBlob
+    });
+    navigator.clipboard.write([clipboardItem]);
+
+})
+
+
 createPost.addEventListener('click', () => {
     popup.style.display = 'flex';
 })
@@ -187,7 +206,8 @@ function openMenu(btn) {
     console.log(btn);
     const rect = btn.getBoundingClientRect();
 
-    hamburgerMenu.style.top = `${rect.bottom + window.scrollY}px`;
-    hamburgerMenu.style.left = `${rect.left + window.scrollX}px`;
+    hamburgerMenu.style.top = `${rect.bottom + window.scrollY - hamburgerMenu.offsetHeight}px`;
+    hamburgerMenu.style.left = `${rect.right + window.scrollX}px`;
     hamburgerMenu.style.display = 'flex'
+    hamburgerMenu.selectedPost = btn.parentElement.parentElement;
 }
