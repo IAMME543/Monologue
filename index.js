@@ -18,7 +18,6 @@ const remove = document.getElementById('remove');
 const edit = document.getElementById('edit');
 
 copy.addEventListener('click', () => {
-    //TODO: Add image support, could just add img tag to the object containing the content
     const content = hamburgerMenu.selectedPost.querySelector(':scope > p').innerHTML
 
     const htmlBlob = new Blob([content], { type: "text/html" });
@@ -173,7 +172,7 @@ function addToFeed(postData) {
         postImage = document.createElement('img');
         postImage.src = postData.Image;
         tempDiv.append(postImage);
-        postContainer.append(tempDiv);
+        postContent.append(tempDiv);
     }
 
     const bottomDiv = document.createElement('div');
