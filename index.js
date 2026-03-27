@@ -27,7 +27,11 @@ copy.addEventListener('click', () => {
         "text/plain": plainBlob
     });
     navigator.clipboard.write([clipboardItem]);
-
+})
+remove.addEventListener('click', () => {
+    postData = hamburgerMenu.selectedPost.postData;
+    postData.visible = false;
+    setPost(postData)
 })
 
 
@@ -87,7 +91,7 @@ request.onsuccess = (event) => {
     })
 
     postButton.addEventListener('click', () => addPost({
-        Body: postIn.value, Image: image, createdAt: Date.now()
+        Body: postIn.value, Image: image, createdAt: Date.now(), visible: true
     }))
 };
 
@@ -138,67 +142,96 @@ function getAllPosts() {
         const store = transaction.objectStore(storeName);
 
         const request = store.getAll();
+        let result;
 
         request.onsuccess = (event) => {
-            resolve(event.target.result);
+            result = event.target.result;
         };
         request.onerror = (event) => {
             reject(event.target.error);
         };
+        transaction.oncomplete = () => {
+            resolve(result);
+        }
     });
 }
+function setPost(data) {
+    const transaction = db.transaction(storeName, "readwrite");
+    const store = transaction.objectStore(storeName);
 
+    const updateRequest = store.put(data);
+
+    updateRequest.onsuccess = () => {
+        console.log("Record updated successfully");
+    };
+
+    updateRequest.onerror = () => {
+        console.error("Update failed");
+    };
+
+    transaction.oncomplete = () => {
+        getAllPosts().then(posts => {
+            setFeed(posts);
+        })
+
+    };
+};
 function setFeed(posts) {
-    //console.log(posts)
+    feed.replaceChildren();
     posts.forEach(postData => {
         addToFeed(postData)
     });
 }
+
 function addToFeed(postData) {
-    postContainer = document.createElement('div');
-    postContainer.classList.add('post');
-    feed.prepend(postContainer);
+    const visible = postData.visible ?? true;
+    if (visible) {
+        postContainer = document.createElement('div');
+        postContainer.classList.add('post');
+        feed.prepend(postContainer);
+        postContainer.postData = postData;
 
-    //content
-    html = postData.Body.replace(/\r?\n/g, ' <br> ');
-    postContent = document.createElement('p');
-    postContent.innerHTML = html;
-    postContainer.append(postContent);
-    //Images
-    if (postData.Image) {
-        tempDiv = document.createElement('div');
-        tempDiv.style.textAlign = "center";
+        //content
+        html = postData.Body.replace(/\r?\n/g, ' <br> ');
+        postContent = document.createElement('p');
+        postContent.innerHTML = html;
+        postContainer.append(postContent);
+        //Images
+        if (postData.Image) {
+            tempDiv = document.createElement('div');
+            tempDiv.style.textAlign = "center";
 
-        postImage = document.createElement('img');
-        postImage.src = postData.Image;
-        tempDiv.append(postImage);
-        postContent.append(tempDiv);
-    }
+            postImage = document.createElement('img');
+            postImage.src = postData.Image;
+            tempDiv.append(postImage);
+            postContent.append(tempDiv);
+        }
 
-    const bottomDiv = document.createElement('div');
-    bottomDiv.classList.add('bottomDiv');
-    postContainer.append(bottomDiv);
-    //timestamp
-    const date = new Date(postData.createdAt)
-    const options = { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' };
-    const formatted = date.toLocaleString('en-US', options);
+        const bottomDiv = document.createElement('div');
+        bottomDiv.classList.add('bottomDiv');
+        postContainer.append(bottomDiv);
+        //timestamp
+        const date = new Date(postData.createdAt)
+        const options = { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' };
+        const formatted = date.toLocaleString('en-US', options);
 
-    const dateP = document.createElement('p')
-    dateP.innerHTML = formatted;
-    dateP.classList.add('date');
-    bottomDiv.append(dateP)
+        const dateP = document.createElement('p')
+        dateP.innerHTML = formatted;
+        dateP.classList.add('date');
+        bottomDiv.append(dateP)
 
-    //hamburger menu
-    const hamburger = document.createElement('button');
-    hamburger.classList.add('hamburger')
-    bottomDiv.append(hamburger)
-    hamburger.innerHTML = "..."
+        //hamburger menu
+        const hamburger = document.createElement('button');
+        hamburger.classList.add('hamburger')
+        bottomDiv.append(hamburger)
+        hamburger.innerHTML = "..."
 
-    document.querySelectorAll('.hamburger').forEach(btn => {
-        btn.addEventListener('click', () => {
-            openMenu(btn);
+        document.querySelectorAll('.hamburger').forEach(btn => {
+            btn.addEventListener('click', () => {
+                openMenu(btn);
+            })
         })
-    })
+    }
 }
 
 function openMenu(btn) {
