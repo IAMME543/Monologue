@@ -11,11 +11,11 @@ const popup = document.getElementById('popup');
 const hamburgerMenu = document.getElementById('hamburgerMenu');
 
 
-let image;
-
 const copy = document.getElementById('copy');
 const remove = document.getElementById('remove');
 const edit = document.getElementById('edit');
+
+popup.editing = false;
 
 copy.addEventListener('click', () => {
     const content = hamburgerMenu.selectedPost.querySelector(':scope > p').innerHTML
@@ -35,6 +35,20 @@ remove.addEventListener('click', () => {
     hamburgerMenu.selectedPost.remove();
     hamburgerMenu.style.display = 'none'
 })
+edit.addEventListener('click', () => {
+    popup.style.display = 'flex'
+    data = hamburgerMenu.selectedPost.postData;
+    postIn.value = data.Body;
+    if (data.Image) {
+        popup.imageStore = data.Image
+        console.log(popup.imageStore)
+
+        addImagePreview(data.Image);
+    }
+    popup.editing = true;
+    hamburgerMenu.style.display = 'none';
+
+})
 
 
 createPost.addEventListener('click', () => {
@@ -42,6 +56,16 @@ createPost.addEventListener('click', () => {
 })
 closePopup.addEventListener('click', () => {
     popup.style.display = 'none';
+    popup.editing = false;
+
+    const image = document.getElementById('imgWrap');
+    if (image != null) {
+        image.remove();
+    }
+    imageInput.value = "";
+    popup.imageStore = "";
+    postIn.value = "";
+    window.scrollTo(0, 0)
 })
 
 imgBtn.addEventListener('click', () => {
@@ -53,24 +77,25 @@ imageInput.addEventListener('change', (event) => {
 
     const reader = new FileReader();
     reader.onload = (e) => {
-        const existing = document.getElementById('imgWrap');
-        if (existing != null) {
-            existing.remove();
-        }
-        const imgWrap = document.createElement('div');
-        const preview = document.createElement('img');
-        preview.id = 'imgPreview'
-        preview.src = e.target.result;
-        imgWrap.id = 'imgWrap'
-        imgWrap.append(preview);
-        popup.firstElementChild.prepend(imgWrap);
 
-        image = e.target.result;
+        addImagePreview(e.target.result);
     };
     reader.readAsDataURL(file);
-
 })
-
+function addImagePreview(img) {
+    const existing = document.getElementById('imgWrap');
+    if (existing != null) {
+        existing.remove();
+    }
+    const imgWrap = document.createElement('div');
+    const preview = document.createElement('img');
+    preview.id = 'imgPreview'
+    preview.src = img;
+    imgWrap.id = 'imgWrap'
+    imgWrap.append(preview);
+    popup.firstElementChild.prepend(imgWrap);
+    popup.imageStore = img;
+}
 
 const storeName = "posts";
 
@@ -92,9 +117,31 @@ request.onsuccess = (event) => {
         setFeed(posts);
     })
 
-    postButton.addEventListener('click', () => addPost({
-        Body: postIn.value, Image: image, createdAt: Date.now(), visible: true
-    }))
+    postButton.addEventListener('click', () => {
+        if (popup.editing) {
+            postData = hamburgerMenu.selectedPost.postData;
+            postData.Body = postIn.value;
+            postData.Image = popup.imageStore;
+            postData.createdAt = Date.now();
+
+            setPost(postData);
+            hamburgerMenu.selectedPost.querySelector('p').textContent = postData.Body;
+
+            const imgWrap = document.createElement('div');
+            const preview = document.createElement('img');
+            preview.id = 'imgPreview'
+            preview.src = postData.Image;
+            imgWrap.id = 'imgWrap'
+            imgWrap.append(preview);
+            hamburgerMenu.selectedPost.querySelector('p').append(imgWrap);
+        } else {
+            addPost({
+                Body: postIn.value, Image: popup.imageStore, createdAt: Date.now(), visible: true
+            })
+        }
+        closePopup.click();
+    })
+
 };
 
 request.onupgradeneeded = (event) => {
@@ -114,14 +161,7 @@ request.onupgradeneeded = (event) => {
 };
 
 function addPost(data) {
-    popup.style.display = 'none';
-    postIn.value = "";
-    imageInput.value = "";
-    image = "";
-    const existing = document.getElementById('imgPreview');
-    if (existing != null) {
-        existing.remove();
-    }
+
 
     addToFeed(data)
     if (data.Body == "") {
@@ -238,3 +278,4 @@ function openMenu(btn) {
     hamburgerMenu.style.display = 'flex'
     hamburgerMenu.selectedPost = btn.parentElement.parentElement;
 }
+
