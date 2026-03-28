@@ -275,7 +275,7 @@ function addToFeed(postData) {
 function openMenu(btn) {
     console.log(btn);
     const rect = btn.getBoundingClientRect();
-    if (window.matchMedia('(max-aspect-ratio: 1/1)')) {
+    if (window.innerWidth < 768) {
         hamburgerMenu.style.top = `${rect.bottom + window.scrollY - hamburgerMenu.offsetHeight}px`;
         hamburgerMenu.style.left = `${rect.left + window.scrollX - hamburgerMenu.offsetWidth}px`;
     }

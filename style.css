@@ -151,7 +151,7 @@ button:hover {
 }
 
 /*Mobile Adjustments*/
-@media (max-aspect-ratio: 1/1) {
+@media (max-width: 768px) {
     main {
         width: 100vw;
     }
