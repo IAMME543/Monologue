@@ -28,6 +28,24 @@ img {
     margin-top: 0px;
 }
 
+.bottomDiv {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#hamburgerMenu {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    background-color: #ffffff;
+    border: solid #ccc;
+    border-radius: 1em;
+}
+
+#hamburgerMenu>button {
+    padding: .5em;
+}
+
 /*Popup*/
 #popup {
     display: none;
@@ -63,9 +81,10 @@ img {
     margin: .5em 0;
 }
 
-#popup button {
+button {
     border: none;
     background-color: transparent;
+    vertical-align: middle;
 }
 
 #close {
@@ -121,6 +140,7 @@ header button {
 
 button:hover {
     cursor: pointer;
+    color: rgb(78, 78, 78);
 }
 
 /*Mobile Adjustments*/
