@@ -126,7 +126,9 @@ request.onsuccess = (event) => {
             postData.createdAt = Date.now();
 
             setPost(postData);
-            hamburgerMenu.selectedPost.querySelector('p').textContent = postData.Body;
+
+            html = postData.Body.replace(/\r?\n/g, ' <br> ');
+            hamburgerMenu.selectedPost.querySelector('p').innerHTML = html;
 
             const imgWrap = document.createElement('div');
             const preview = document.createElement('img');
