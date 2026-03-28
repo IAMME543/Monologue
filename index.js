@@ -27,6 +27,7 @@ copy.addEventListener('click', () => {
         "text/plain": plainBlob
     });
     navigator.clipboard.write([clipboardItem]);
+    hamburgerMenu.style.display = 'none'
 })
 remove.addEventListener('click', () => {
     postData = hamburgerMenu.selectedPost.postData;
