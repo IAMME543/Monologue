@@ -262,7 +262,7 @@ function addToFeed(postData) {
         const hamburger = document.createElement('button');
         hamburger.classList.add('hamburger')
         bottomDiv.append(hamburger)
-        hamburger.innerHTML = "..."
+        hamburger.innerHTML = " ..."
 
         document.querySelectorAll('.hamburger').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -275,9 +275,16 @@ function addToFeed(postData) {
 function openMenu(btn) {
     console.log(btn);
     const rect = btn.getBoundingClientRect();
+    if (window.matchMedia('(max-aspect-ratio: 1/1)')) {
+        hamburgerMenu.style.top = `${rect.bottom + window.scrollY - hamburgerMenu.offsetHeight}px`;
+        hamburgerMenu.style.left = `${rect.left + window.scrollX - hamburgerMenu.offsetWidth}px`;
+    }
+    else {
+        hamburgerMenu.style.top = `${rect.bottom + window.scrollY - hamburgerMenu.offsetHeight}px`;
+        hamburgerMenu.style.left = `${rect.right + window.scrollX}px`;
+    }
 
-    hamburgerMenu.style.top = `${rect.bottom + window.scrollY - hamburgerMenu.offsetHeight}px`;
-    hamburgerMenu.style.left = `${rect.right + window.scrollX}px`;
+
     hamburgerMenu.style.display = 'flex'
     hamburgerMenu.selectedPost = btn.parentElement.parentElement;
 }

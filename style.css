@@ -46,6 +46,13 @@ img {
     padding: .5em;
 }
 
+.hamburger {
+    writing-mode: vertical-rl;
+    text-align: left;
+    margin-left: 1em;
+    padding: 0;
+}
+
 /*Popup*/
 #popup {
     display: none;
