@@ -77,11 +77,12 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--off-background);
+    background-color: rgba(var(--off-background), .5);
     justify-content: center;
     align-items: center;
     z-index: 9999;
     flex-direction: column;
+
 }
 
 .popupContent {
@@ -121,6 +122,9 @@ button {
     height: 45vh;
     margin-bottom: 1em;
     resize: none;
+    background-color: var(--background);
+    color: var(--text);
+    font-family: sans-serif;
 
 }
 
