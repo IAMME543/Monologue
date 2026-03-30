@@ -110,6 +110,7 @@ button {
     background-color: transparent;
     vertical-align: middle;
     color: var(--text);
+    font-size: 1em;
 }
 
 #close {
