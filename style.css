@@ -2,6 +2,21 @@
     font-family: sans-serif;
     display: flex;
     justify-content: center;
+    --background: #ffffff;
+    --border: #ccc;
+    --off-background: rgb(250, 250, 250);
+    --text: #000000;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #27272a;
+        --border: #ccc;
+        --off-background: #36363a;
+        --text: #ffffff;
+        background-color: var(--background);
+        color: white;
+    }
 }
 
 main {
@@ -17,13 +32,13 @@ img {
 }
 
 .post {
-    border-top: 1px solid #ccc;
+    border-top: 1px solid var(--border);
     padding: .5em 1em;
 }
 
 .date {
     font-size: 0.8em;
-    color: gray;
+    color: var(--border);
     text-align: right;
     margin-top: 0px;
 }
@@ -37,13 +52,14 @@ img {
     display: none;
     position: absolute;
     flex-direction: column;
-    background-color: #ffffff;
-    border: solid #ccc;
+    background-color: var(--off-background);
+    border: solid var(--border);
     border-radius: 1em;
 }
 
 #hamburgerMenu>button {
     padding: .5em;
+    color: var(--text);
 }
 
 .hamburger {
@@ -61,7 +77,7 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(250, 250, 250, 0.5);
+    background-color: var(--off-background);
     justify-content: center;
     align-items: center;
     z-index: 9999;
@@ -69,13 +85,13 @@ img {
 }
 
 .popupContent {
-    background-color: rgb(250, 250, 250);
+    background-color: var(--off-background);
     padding: 1em;
     display: inherit;
     flex-direction: column;
 
     border-radius: 1em;
-    border: solid #ccc;
+    border: solid var(--border);
 }
 
 .popupContent>div {
@@ -92,6 +108,7 @@ button {
     border: none;
     background-color: transparent;
     vertical-align: middle;
+    color: var(--text);
 }
 
 #close {
@@ -143,11 +160,12 @@ header button {
     font-size: 3em;
     align-items: center;
     justify-content: center;
+    color: var(--text);
 }
 
 button:hover {
     cursor: pointer;
-    color: rgb(78, 78, 78);
+    color: var(--border);
 }
 
 /*Mobile Adjustments*/
