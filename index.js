@@ -54,6 +54,8 @@ edit.addEventListener('click', () => {
 
 createPost.addEventListener('click', () => {
     popup.style.display = 'flex';
+    hamburgerMenu.style.display = 'none'
+
 })
 closePopup.addEventListener('click', () => {
     popup.style.display = 'none';
@@ -164,8 +166,6 @@ request.onupgradeneeded = (event) => {
 };
 
 function addPost(data) {
-
-
     addToFeed(data)
     if (data.Body == "") {
         return
