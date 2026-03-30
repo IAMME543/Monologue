@@ -17,7 +17,16 @@ const edit = document.getElementById('edit');
 
 popup.editing = false;
 
-copy.addEventListener('click', () => {
+document.addEventListener('click', (e) => {
+    if (!popup.firstElementChild.contains(e.target) && popup.style.display !== 'none') {
+        popup.style.display = 'none';
+    }
+    if (!hamburgerMenu.contains(e.target) && hamburgerMenu.style.display !== 'none') {
+        hamburgerMenu.style.display = 'none';
+    }
+})
+
+copy.addEventListener('click', (e) => {
     const content = hamburgerMenu.selectedPost.querySelector(':scope > p').innerHTML
 
     const htmlBlob = new Blob([content], { type: "text/html" });
@@ -28,15 +37,17 @@ copy.addEventListener('click', () => {
     });
     navigator.clipboard.write([clipboardItem]);
     hamburgerMenu.style.display = 'none'
+    e.stopPropagation();
 })
-remove.addEventListener('click', () => {
+remove.addEventListener('click', (e) => {
     postData = hamburgerMenu.selectedPost.postData;
     postData.visible = false;
     setPost(postData)
     hamburgerMenu.selectedPost.remove();
     hamburgerMenu.style.display = 'none'
+    e.stopPropagation();
 })
-edit.addEventListener('click', () => {
+edit.addEventListener('click', (e) => {
     popup.style.display = 'flex'
     data = hamburgerMenu.selectedPost.postData;
     postIn.value = data.Body;
@@ -48,14 +59,17 @@ edit.addEventListener('click', () => {
     }
     popup.editing = true;
     hamburgerMenu.style.display = 'none';
-
+    e.stopPropagation();
 })
 
 
-createPost.addEventListener('click', () => {
+createPost.addEventListener('click', (e) => {
     popup.style.display = 'flex';
+    hamburgerMenu.style.display = 'none'
+    e.stopPropagation();
+
 })
-closePopup.addEventListener('click', () => {
+closePopup.addEventListener('click', (e) => {
     popup.style.display = 'none';
     popup.editing = false;
 
@@ -67,10 +81,12 @@ closePopup.addEventListener('click', () => {
     popup.imageStore = "";
     postIn.value = "";
     window.scrollTo(0, 0)
+    e.stopPropagation();
 })
 
-imgBtn.addEventListener('click', () => {
+imgBtn.addEventListener('click', (e) => {
     imageInput.click();
+    e.stopPropagation();
 })
 imageInput.addEventListener('change', (event) => {
     const file = event.target.files[0];
@@ -82,6 +98,7 @@ imageInput.addEventListener('change', (event) => {
         addImagePreview(e.target.result);
     };
     reader.readAsDataURL(file);
+    event.stopPropagation();
 })
 function addImagePreview(img) {
     const existing = document.getElementById('imgWrap');
@@ -96,6 +113,7 @@ function addImagePreview(img) {
     imgWrap.append(preview);
     popup.firstElementChild.prepend(imgWrap);
     popup.imageStore = img;
+    e.stopPropagation();
 }
 
 const storeName = "posts";
@@ -118,7 +136,7 @@ request.onsuccess = (event) => {
         setFeed(posts);
     })
 
-    postButton.addEventListener('click', () => {
+    postButton.addEventListener('click', (e) => {
         if (popup.editing) {
             postData = hamburgerMenu.selectedPost.postData;
             postData.Body = postIn.value;
@@ -143,6 +161,7 @@ request.onsuccess = (event) => {
             })
         }
         closePopup.click();
+        e.stopPropagation();
     })
 
 };
@@ -164,8 +183,6 @@ request.onupgradeneeded = (event) => {
 };
 
 function addPost(data) {
-
-
     addToFeed(data)
     if (data.Body == "") {
         return
@@ -262,11 +279,12 @@ function addToFeed(postData) {
         const hamburger = document.createElement('button');
         hamburger.classList.add('hamburger')
         bottomDiv.append(hamburger)
-        hamburger.innerHTML = "..."
+        hamburger.innerHTML = " ..."
 
         document.querySelectorAll('.hamburger').forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', (e) => {
                 openMenu(btn);
+                e.stopPropagation();
             })
         })
     }
@@ -275,9 +293,16 @@ function addToFeed(postData) {
 function openMenu(btn) {
     console.log(btn);
     const rect = btn.getBoundingClientRect();
+    if (window.innerWidth < 768) {
+        hamburgerMenu.style.top = `${rect.bottom + window.scrollY - hamburgerMenu.offsetHeight}px`;
+        hamburgerMenu.style.left = `${rect.left + window.scrollX - hamburgerMenu.offsetWidth}px`;
+    }
+    else {
+        hamburgerMenu.style.top = `${rect.bottom + window.scrollY - hamburgerMenu.offsetHeight}px`;
+        hamburgerMenu.style.left = `${rect.right + window.scrollX}px`;
+    }
 
-    hamburgerMenu.style.top = `${rect.bottom + window.scrollY - hamburgerMenu.offsetHeight}px`;
-    hamburgerMenu.style.left = `${rect.right + window.scrollX}px`;
+
     hamburgerMenu.style.display = 'flex'
     hamburgerMenu.selectedPost = btn.parentElement.parentElement;
 }
