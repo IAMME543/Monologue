@@ -299,8 +299,6 @@ function openMenu(btn) {
         hamburgerMenu.style.top = `${rect.bottom + window.scrollY - hamburgerMenu.offsetHeight}px`;
         hamburgerMenu.style.left = `${rect.right + window.scrollX}px`;
     }
-
-
     hamburgerMenu.style.display = 'flex'
     hamburgerMenu.selectedPost = btn.parentElement.parentElement;
 }
