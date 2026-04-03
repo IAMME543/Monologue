@@ -126,7 +126,8 @@ button {
     background-color: var(--background);
     color: var(--text);
     font-family: sans-serif;
-
+    padding: .5em;
+    box-sizing: border-box;
 }
 
 #popup textarea:focus {

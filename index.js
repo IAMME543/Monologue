@@ -53,7 +53,7 @@ edit.addEventListener('click', (e) => {
     postIn.value = data.Body;
     if (data.Image) {
         popup.imageStore = data.Image
-        console.log(popup.imageStore)
+
 
         addImagePreview(data.Image);
     }
@@ -187,7 +187,6 @@ function addPost(data) {
     if (data.Body == "") {
         return
     }
-    //console.log(data)
     const transaction = db.transaction(storeName, "readwrite");
     const store = transaction.objectStore(storeName);
 
@@ -291,7 +290,6 @@ function addToFeed(postData) {
 }
 
 function openMenu(btn) {
-    console.log(btn);
     const rect = btn.getBoundingClientRect();
     if (window.innerWidth < 768) {
         hamburgerMenu.style.top = `${rect.bottom + window.scrollY - hamburgerMenu.offsetHeight}px`;
@@ -301,8 +299,6 @@ function openMenu(btn) {
         hamburgerMenu.style.top = `${rect.bottom + window.scrollY - hamburgerMenu.offsetHeight}px`;
         hamburgerMenu.style.left = `${rect.right + window.scrollX}px`;
     }
-
-
     hamburgerMenu.style.display = 'flex'
     hamburgerMenu.selectedPost = btn.parentElement.parentElement;
 }
