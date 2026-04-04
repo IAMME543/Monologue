@@ -80,7 +80,8 @@ closePopup.addEventListener('click', (e) => {
     imageInput.value = "";
     popup.imageStore = "";
     postIn.value = "";
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
+    document.body.scrollTo(0, 0);
     e.stopPropagation();
 })
 
