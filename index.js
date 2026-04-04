@@ -65,6 +65,7 @@ edit.addEventListener('click', (e) => {
 
 createPost.addEventListener('click', (e) => {
     popup.style.display = 'flex';
+    postIn.focus();
     hamburgerMenu.style.display = 'none'
     e.stopPropagation();
 
