@@ -133,6 +133,9 @@ button {
     font-family: sans-serif;
     padding: .5em;
     box-sizing: border-box;
+    background-color: var(--off-background);
+    border: solid var(--border);
+    border-radius: .5em;
 }
 
 #popup textarea:focus {
