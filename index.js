@@ -297,6 +297,8 @@ function addToFeed(postData) {
 }
 
 function openMenu(btn) {
+    hamburgerMenu.style.display = 'flex'
+
     const rect = btn.getBoundingClientRect();
     if (window.innerWidth < 768) {
         hamburgerMenu.style.top = `${rect.bottom + window.scrollY - hamburgerMenu.offsetHeight}px`;
@@ -306,6 +308,5 @@ function openMenu(btn) {
         hamburgerMenu.style.top = `${rect.bottom + window.scrollY - hamburgerMenu.offsetHeight}px`;
         hamburgerMenu.style.left = `${rect.right + window.scrollX}px`;
     }
-    hamburgerMenu.style.display = 'flex'
     state.selectedPost = btn.parentElement.parentElement;
 }
