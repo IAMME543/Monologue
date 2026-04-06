@@ -36,6 +36,11 @@ img {
     padding: .5em 1em;
 }
 
+.post>p {
+    overflow-wrap: break-word;
+    text-wrap: wrap;
+}
+
 .date {
     font-size: 0.8em;
     color: var(--border);
@@ -128,6 +133,9 @@ button {
     font-family: sans-serif;
     padding: .5em;
     box-sizing: border-box;
+    background-color: var(--off-background);
+    border: solid var(--border);
+    border-radius: .5em;
 }
 
 #popup textarea:focus {
@@ -164,6 +172,7 @@ header button {
     border: none;
     background-color: transparent;
     font-size: 3em;
+    font-weight: bolder;
     align-items: center;
     justify-content: center;
     color: var(--text);
