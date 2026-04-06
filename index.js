@@ -15,7 +15,12 @@ const copy = document.getElementById('copy');
 const remove = document.getElementById('remove');
 const edit = document.getElementById('edit');
 
-popup.editing = false;
+
+let state = {
+    selectedPost: null,
+    editingPost: false,
+    imageStore: ""
+}
 
 document.addEventListener('click', (e) => {
     if (!popup.firstElementChild.contains(e.target) && popup.style.display !== 'none') {
@@ -27,7 +32,7 @@ document.addEventListener('click', (e) => {
 })
 
 copy.addEventListener('click', (e) => {
-    const content = hamburgerMenu.selectedPost.querySelector(':scope > p').innerHTML
+    const content = state.selectedPost.querySelector(':scope > p').innerHTML
 
     const htmlBlob = new Blob([content], { type: "text/html" });
     const plainBlob = new Blob([content], { type: "text/plain" });
@@ -40,24 +45,24 @@ copy.addEventListener('click', (e) => {
     e.stopPropagation();
 })
 remove.addEventListener('click', (e) => {
-    postData = hamburgerMenu.selectedPost.postData;
+    postData = state.selectedPost.postData;
     postData.visible = false;
     setPost(postData)
-    hamburgerMenu.selectedPost.remove();
+    state.selectedPost.remove();
     hamburgerMenu.style.display = 'none'
     e.stopPropagation();
 })
 edit.addEventListener('click', (e) => {
     popup.style.display = 'flex'
-    data = hamburgerMenu.selectedPost.postData;
+    data = state.selectedPost.postData;
     postIn.value = data.Body;
     if (data.Image) {
-        popup.imageStore = data.Image
+        state.imageStore = data.Image
 
 
         addImagePreview(data.Image);
     }
-    popup.editing = true;
+    state.editingPost = true;
     hamburgerMenu.style.display = 'none';
     e.stopPropagation();
 })
@@ -72,14 +77,14 @@ createPost.addEventListener('click', (e) => {
 })
 closePopup.addEventListener('click', (e) => {
     popup.style.display = 'none';
-    popup.editing = false;
+    state.editingPost = false;
 
     const image = document.getElementById('imgWrap');
     if (image != null) {
         image.remove();
     }
     imageInput.value = "";
-    popup.imageStore = "";
+    state.imageStore = "";
     postIn.value = "";
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox
@@ -114,7 +119,7 @@ function addImagePreview(img) {
     imgWrap.id = 'imgWrap'
     imgWrap.append(preview);
     popup.firstElementChild.prepend(imgWrap);
-    popup.imageStore = img;
+    state.imageStore = img;
     e.stopPropagation();
 }
 
@@ -139,16 +144,16 @@ request.onsuccess = (event) => {
     })
 
     postButton.addEventListener('click', (e) => {
-        if (popup.editing) {
-            postData = hamburgerMenu.selectedPost.postData;
+        if (state.editingPost) {
+            postData = state.selectedPost.postData;
             postData.Body = postIn.value;
-            postData.Image = popup.imageStore;
+            postData.Image = state.imageStore;
             postData.createdAt = Date.now();
 
             setPost(postData);
 
             html = postData.Body.replace(/\r?\n/g, ' <br> ');
-            hamburgerMenu.selectedPost.querySelector('p').innerHTML = html;
+            state.selectedPost.querySelector('p').innerHTML = html;
 
             const imgWrap = document.createElement('div');
             const preview = document.createElement('img');
@@ -156,10 +161,11 @@ request.onsuccess = (event) => {
             preview.src = postData.Image;
             imgWrap.id = 'imgWrap'
             imgWrap.append(preview);
-            hamburgerMenu.selectedPost.querySelector('p').append(imgWrap);
+            state.selectedPost.querySelector('p').append(imgWrap);
+            console.log(navigator.sendBeacon('htps://monologue.mirabito-mason.workers.dev/analyticsbeacon'))
         } else {
             addPost({
-                Body: postIn.value, Image: popup.imageStore, createdAt: Date.now(), visible: true
+                Body: postIn.value, Image: state.imageStore, createdAt: Date.now(), visible: true
             })
         }
         closePopup.click();
@@ -302,6 +308,5 @@ function openMenu(btn) {
         hamburgerMenu.style.left = `${rect.right + window.scrollX}px`;
     }
     hamburgerMenu.style.display = 'flex'
-    hamburgerMenu.selectedPost = btn.parentElement.parentElement;
+    state.selectedPost = btn.parentElement.parentElement;
 }
-
