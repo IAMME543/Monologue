@@ -36,6 +36,11 @@ img {
     padding: .5em 1em;
 }
 
+.post>p {
+    overflow-wrap: break-word;
+    text-wrap: wrap;
+}
+
 .date {
     font-size: 0.8em;
     color: var(--border);
