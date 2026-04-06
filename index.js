@@ -162,7 +162,6 @@ request.onsuccess = (event) => {
             imgWrap.id = 'imgWrap'
             imgWrap.append(preview);
             state.selectedPost.querySelector('p').append(imgWrap);
-            console.log(navigator.sendBeacon('htps://monologue.mirabito-mason.workers.dev/analyticsbeacon'))
         } else {
             addPost({
                 Body: postIn.value, Image: state.imageStore, createdAt: Date.now(), visible: true
