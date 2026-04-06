@@ -169,6 +169,7 @@ header button {
     border: none;
     background-color: transparent;
     font-size: 3em;
+    font-weight: bolder;
     align-items: center;
     justify-content: center;
     color: var(--text);
