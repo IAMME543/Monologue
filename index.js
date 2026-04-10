@@ -120,6 +120,17 @@ function addImagePreview(img) {
     imgWrap.append(preview);
     popup.firstElementChild.prepend(imgWrap);
     state.imageStore = img;
+    let remove = document.createElement('button');
+    remove.innerHTML = "X";
+    remove.classList.add("removeBtn");
+    remove.addEventListener('click', (e) => {
+        const existing = document.getElementById('imgWrap');
+        if (existing != null) {
+            existing.remove();
+        }
+        e.stopPropagation();
+    });
+    imgWrap.append(remove)
 }
 
 const storeName = "posts";

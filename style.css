@@ -4,6 +4,7 @@
     justify-content: center;
     --background: #ffffff;
     --border: #ccc;
+    --grey-text: #777;
     --off-background: rgb(250, 250, 250);
     --text: #000000;
     --border-width: .2em;
@@ -14,6 +15,7 @@
         --background: #27272a;
         --border: #ccc;
         --off-background: #36363a;
+        --grey-text: #777;
         --text: #ffffff;
         --border-width: .2em;
         background-color: var(--background);
@@ -45,7 +47,7 @@ img {
 
 .date {
     font-size: 0.8em;
-    color: var(--border);
+    color: var(--grey-text);
     text-align: right;
     margin-top: 0px;
 }
@@ -67,7 +69,7 @@ img {
 
 #hamburgerMenu>button {
     padding: .5em;
-    color: var(--text);
+    color: var(--grey-text);
 }
 
 .hamburger {
@@ -96,22 +98,28 @@ img {
 .popupContent {
     background-color: var(--off-background);
     padding: 1em;
-    display: inherit;
+    display: flex;
     flex-direction: column;
+    align-items: center;
 
     border-radius: 1em;
     border: solid var(--border);
     border-width: var(--border-width);
 }
 
-.popupContent>div {
+.buttons {
     position: relative;
+    width: 100%;
 }
 
 #imgWrap {
-    display: flex;
-    justify-content: center;
     margin: .5em 0;
+    display: inline-block;
+    position: relative;
+}
+
+#imgWrap>img {
+    display: block;
 }
 
 button {
@@ -156,6 +164,24 @@ button {
     vertical-align: middle;
 }
 
+.removeBtn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: color-mix(in srgb, var(--off-background) 50%, transparent);
+    border-radius: 50%;
+    width: 1.5em !important;
+    height: 1.5em !important;
+    padding: 0;
+    margin: .25em;
+    font-weight: bold;
+}
+
+.removeBtn:hover {
+    color: var(--text);
+    background-color: color-mix(in srgb, var(--off-background)80%, transparent);
+}
+
 /*Header*/
 header {
     display: flex;
@@ -185,7 +211,7 @@ header button {
 
 button:hover {
     cursor: pointer;
-    color: var(--border);
+    color: var(--grey-text);
 }
 
 /*Mobile Adjustments*/
