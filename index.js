@@ -108,10 +108,7 @@ imageInput.addEventListener('change', (event) => {
     event.stopPropagation();
 })
 function addImagePreview(img) {
-    const existing = document.getElementById('imgWrap');
-    if (existing != null) {
-        existing.remove();
-    }
+    removeImagePreview();
     const imgWrap = document.createElement('div');
     const preview = document.createElement('img');
     preview.id = 'imgPreview'
@@ -124,13 +121,16 @@ function addImagePreview(img) {
     remove.innerHTML = "X";
     remove.classList.add("removeBtn");
     remove.addEventListener('click', (e) => {
-        const existing = document.getElementById('imgWrap');
-        if (existing != null) {
-            existing.remove();
-        }
+        removeImagePreview();
         e.stopPropagation();
     });
     imgWrap.append(remove)
+}
+function removeImagePreview() {
+    const existing = document.getElementById('imgWrap');
+    if (existing != null) {
+        existing.remove();
+    }
 }
 
 const storeName = "posts";
