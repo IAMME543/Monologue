@@ -120,7 +120,6 @@ function addImagePreview(img) {
     imgWrap.append(preview);
     popup.firstElementChild.prepend(imgWrap);
     state.imageStore = img;
-    e.stopPropagation();
 }
 
 const storeName = "posts";
