@@ -30,7 +30,25 @@ document.addEventListener('click', (e) => {
         hamburgerMenu.style.display = 'none';
     }
 })
+postIn.addEventListener('paste', (e) => {
+    const items = e.clipboardData.items;
+    for (let i = 0; i < items.length; i++) {
+        let item = items[i];
 
+        if (item.type.startsWith('image/')) {
+            const file = item.getAsFile();
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const url = event.target.result;
+                addImagePreview(url);
+                state.imageStore = url;
+            };
+            reader.readAsDataURL(file);
+            e.preventDefault();
+        }
+    }
+})
 copy.addEventListener('click', (e) => {
     const content = state.selectedPost.querySelector(':scope > p').innerHTML
 
