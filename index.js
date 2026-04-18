@@ -136,7 +136,7 @@ function addImagePreview(img) {
     popup.firstElementChild.prepend(imgWrap);
     state.imageStore = img;
     let remove = document.createElement('button');
-    remove.innerHTML = "X";
+    remove.innerHTML = "✖";
     remove.classList.add("removeBtn");
     remove.addEventListener('click', (e) => {
         removeImagePreview();

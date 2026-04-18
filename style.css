@@ -167,7 +167,7 @@ button {
     position: absolute;
     bottom: 0;
     right: 0;
-    background-color: color-mix(in srgb, var(--off-background) 50%, transparent);
+    background-color: color-mix(in srgb, var(--off-background) 80%, transparent);
     border-radius: 50%;
     width: 1.5em !important;
     height: 1.5em !important;
@@ -178,7 +178,7 @@ button {
 
 .removeBtn:hover {
     color: var(--text);
-    background-color: color-mix(in srgb, var(--off-background)80%, transparent);
+    background-color: var(--off-background);
 }
 
 /*Header*/
