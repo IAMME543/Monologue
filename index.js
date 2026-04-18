@@ -30,7 +30,25 @@ document.addEventListener('click', (e) => {
         hamburgerMenu.style.display = 'none';
     }
 })
+postIn.addEventListener('paste', (e) => {
+    const items = e.clipboardData.items;
+    for (let i = 0; i < items.length; i++) {
+        let item = items[i];
 
+        if (item.type.startsWith('image/')) {
+            const file = item.getAsFile();
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const url = event.target.result;
+                addImagePreview(url);
+                state.imageStore = url;
+            };
+            reader.readAsDataURL(file);
+            e.preventDefault();
+        }
+    }
+})
 copy.addEventListener('click', (e) => {
     const content = state.selectedPost.querySelector(':scope > p').innerHTML
 
@@ -108,10 +126,7 @@ imageInput.addEventListener('change', (event) => {
     event.stopPropagation();
 })
 function addImagePreview(img) {
-    const existing = document.getElementById('imgWrap');
-    if (existing != null) {
-        existing.remove();
-    }
+    removeImagePreview();
     const imgWrap = document.createElement('div');
     const preview = document.createElement('img');
     preview.id = 'imgPreview'
@@ -120,7 +135,20 @@ function addImagePreview(img) {
     imgWrap.append(preview);
     popup.firstElementChild.prepend(imgWrap);
     state.imageStore = img;
-    e.stopPropagation();
+    let remove = document.createElement('button');
+    remove.innerHTML = "✖";
+    remove.classList.add("removeBtn");
+    remove.addEventListener('click', (e) => {
+        removeImagePreview();
+        e.stopPropagation();
+    });
+    imgWrap.append(remove)
+}
+function removeImagePreview() {
+    const existing = document.getElementById('imgWrap');
+    if (existing != null) {
+        existing.remove();
+    }
 }
 
 const storeName = "posts";
