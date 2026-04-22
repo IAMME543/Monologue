@@ -27,9 +27,8 @@ main {
     width: 50vw;
 }
 
-img {
-    height: 40vh;
-}
+
+
 
 #imageInput {
     display: none;
@@ -40,9 +39,19 @@ img {
     padding: .5em 1em;
 }
 
+
 .post>p {
     overflow-wrap: break-word;
     text-wrap: wrap;
+}
+
+.post>p>div {
+    text-align: center;
+    padding-top: 1em;
+}
+
+img {
+    height: 40vh;
 }
 
 .date {
