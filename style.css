@@ -27,8 +27,12 @@ main {
     width: 50vw;
 }
 
-
-
+a:link,
+a:visited,
+a:hover,
+a:active {
+    color: rgb(9, 105, 218);
+}
 
 #imageInput {
     display: none;
@@ -220,6 +224,11 @@ header button {
 button:hover {
     cursor: pointer;
     color: var(--grey-text);
+}
+
+/*footer*/
+footer {
+    text-align: center;
 }
 
 /*Mobile Adjustments*/
