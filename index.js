@@ -197,6 +197,7 @@ request.onsuccess = (event) => {
         }
         closePopup.click();
         e.stopPropagation();
+        state.selectedPost.scrollIntoView()
     })
 
 };
