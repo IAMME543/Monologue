@@ -211,7 +211,7 @@ request.onsuccess = (event) => {
             postImage.src = postData.Image;
             tempDiv.append(postImage);
             state.selectedPost.querySelector('p').append(tempDiv);
-
+            state.selectedPost.scrollIntoView()
         } else {
             addPost({
                 Body: postIn.value, Image: state.imageStore, createdAt: Date.now(), visible: true
@@ -219,7 +219,6 @@ request.onsuccess = (event) => {
         }
         closePopup.click();
         e.stopPropagation();
-        state.selectedPost.scrollIntoView()
     })
 
 };
