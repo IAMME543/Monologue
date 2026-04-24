@@ -17,7 +17,7 @@
         --off-background: #36363a;
         --grey-text: #777;
         --text: #ffffff;
-        --border-width: .2em;
+        --border-width: .1em;
         background-color: var(--background);
         color: white;
     }
@@ -242,6 +242,7 @@ footer {
 
 /*Mobile Adjustments*/
 @media (max-width: 768px) {
+
     main {
         width: 100vw;
     }
