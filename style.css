@@ -54,8 +54,12 @@ a:active {
     padding-top: 1em;
 }
 
+.post img {
+    height: 30em;
+}
+
 img {
-    height: 40vh;
+    border-radius: 1em;
 }
 
 .date {
@@ -130,7 +134,8 @@ img {
     position: relative;
 }
 
-#imgWrap>img {
+#imgWrap img {
+    max-height: 40vh;
     display: block;
 }
 
@@ -167,10 +172,6 @@ button {
     outline: none;
 }
 
-#popup img {
-    max-height: 40vh;
-    width: fit-content;
-}
 
 #popup svg {
     vertical-align: middle;
@@ -187,6 +188,9 @@ button {
     padding: 0;
     margin: .25em;
     font-weight: bold;
+    position: absolute;
+    font-family: monospace;
+    font-size: 1.5em;
 }
 
 .removeBtn:hover {
