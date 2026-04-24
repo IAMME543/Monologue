@@ -40,22 +40,24 @@ a:active {
 
 .post {
     border-top: 1px solid var(--border);
-    padding: .5em 1em;
+    padding: 1.5em 1em;
 }
 
 
 .post>p {
     overflow-wrap: break-word;
     text-wrap: wrap;
+    font-size: 1.1em;
+    margin-bottom: .3em;
 }
 
 .post>p>div {
     text-align: center;
-    padding-top: 1em;
+    padding-top: .5em;
 }
 
 .post img {
-    height: 30em;
+    max-width: 95%;
 }
 
 img {
