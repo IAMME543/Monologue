@@ -17,7 +17,7 @@
         --off-background: #36363a;
         --grey-text: #777;
         --text: #ffffff;
-        --border-width: .2em;
+        --border-width: .1em;
         background-color: var(--background);
         color: white;
     }
@@ -40,22 +40,24 @@ a:active {
 
 .post {
     border-top: 1px solid var(--border);
-    padding: .5em 1em;
+    padding: 1.5em 1em;
 }
 
 
 .post>p {
     overflow-wrap: break-word;
     text-wrap: wrap;
+    font-size: 1.1em;
+    margin-bottom: .3em;
 }
 
 .post>p>div {
     text-align: center;
-    padding-top: 1em;
+    padding-top: .5em;
 }
 
 .post img {
-    height: 30em;
+    max-width: 95%;
 }
 
 img {
@@ -109,6 +111,7 @@ img {
     align-items: center;
     z-index: 9999;
     flex-direction: column;
+
 }
 
 .popupContent {
@@ -117,6 +120,7 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 90vw;
 
     border-radius: 1em;
     border: solid var(--border);
@@ -136,6 +140,7 @@ img {
 
 #imgWrap img {
     max-height: 40vh;
+    max-width: 85vw;
     display: block;
 }
 
@@ -237,6 +242,7 @@ footer {
 
 /*Mobile Adjustments*/
 @media (max-width: 768px) {
+
     main {
         width: 100vw;
     }

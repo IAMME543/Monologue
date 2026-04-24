@@ -49,19 +49,40 @@ postIn.addEventListener('paste', (e) => {
         }
     }
 })
-copy.addEventListener('click', (e) => {
-    const content = state.selectedPost.querySelector(':scope > p').innerHTML
-
-    const htmlBlob = new Blob([content], { type: "text/html" });
-    const plainBlob = new Blob([content], { type: "text/plain" });
-    const clipboardItem = new ClipboardItem({
-        "text/html": htmlBlob,
-        "text/plain": plainBlob
-    });
-    navigator.clipboard.write([clipboardItem]);
-    hamburgerMenu.style.display = 'none'
+copy.addEventListener('click', async (e) => {
+    hamburgerMenu.style.display = 'none';
     e.stopPropagation();
-})
+
+    const raw = state.selectedPost.querySelector(':scope > p').innerHTML;
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(raw, 'text/html');
+
+    const cleanedHTML = doc.body.innerHTML;
+
+    const img = doc.querySelector('img')
+    const src = img.src;
+    const res = await fetch(src);
+    const imgBlob = await res.blob();
+
+    const pngBlob = toPNG(imgBlob)
+
+    img.remove();
+    const parent = img.parentElement;
+    if (parent && parent.style.textAlign === 'center' && parent.children.length === 0) {
+        parent.remove();
+    }
+
+    let clipboardItems = {
+        "text/html": new Blob([cleanedHTML], { type: "text/html" }),
+        "text/plain": new Blob([doc.body.textContent], { type: "text/plain" }),
+        "image/png": pngBlob
+    };
+
+    await navigator.clipboard.write([
+        new ClipboardItem(clipboardItems)
+    ]);
+});
 remove.addEventListener('click', (e) => {
     postData = state.selectedPost.postData;
     postData.visible = false;
@@ -183,13 +204,14 @@ request.onsuccess = (event) => {
             html = postData.Body.replace(/\r?\n/g, ' <br> ');
             state.selectedPost.querySelector('p').innerHTML = html;
 
-            const imgWrap = document.createElement('div');
-            const preview = document.createElement('img');
-            preview.id = 'imgPreview'
-            preview.src = postData.Image;
-            imgWrap.id = 'imgWrap'
-            imgWrap.append(preview);
-            state.selectedPost.querySelector('p').append(imgWrap);
+            tempDiv = document.createElement('div');
+            tempDiv.style.textAlign = "center";
+
+            postImage = document.createElement('img');
+            postImage.src = postData.Image;
+            tempDiv.append(postImage);
+            state.selectedPost.querySelector('p').append(tempDiv);
+            state.selectedPost.scrollIntoView()
         } else {
             addPost({
                 Body: postIn.value, Image: state.imageStore, createdAt: Date.now(), visible: true
@@ -338,4 +360,23 @@ function openMenu(btn) {
         hamburgerMenu.style.left = `${rect.right + window.scrollX}px`;
     }
     state.selectedPost = btn.parentElement.parentElement;
+}
+
+async function toPNG(blob) {
+
+    if (blob.type == "image/png") {
+        return blob;
+    }
+    const bitmap = await createImageBitmap(blob);
+
+    const canvas = document.createElement('canvas');
+    canvas.width = bitmap.width;
+    canvas.height = bitmap.height;
+
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(bitmap, 0, 0);
+
+    return new Promise(resolve => {
+        canvas.toBlob(resolve, 'image/png');
+    });
 }
