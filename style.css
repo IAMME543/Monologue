@@ -27,8 +27,11 @@ main {
     width: 50vw;
 }
 
-img {
-    height: 40vh;
+a:link,
+a:visited,
+a:hover,
+a:active {
+    color: rgb(9, 105, 218);
 }
 
 #imageInput {
@@ -40,9 +43,23 @@ img {
     padding: .5em 1em;
 }
 
+
 .post>p {
     overflow-wrap: break-word;
     text-wrap: wrap;
+}
+
+.post>p>div {
+    text-align: center;
+    padding-top: 1em;
+}
+
+.post img {
+    height: 30em;
+}
+
+img {
+    border-radius: 1em;
 }
 
 .date {
@@ -117,7 +134,8 @@ img {
     position: relative;
 }
 
-#imgWrap>img {
+#imgWrap img {
+    max-height: 40vh;
     display: block;
 }
 
@@ -154,10 +172,6 @@ button {
     outline: none;
 }
 
-#popup img {
-    max-height: 40vh;
-    width: fit-content;
-}
 
 #popup svg {
     vertical-align: middle;
@@ -174,6 +188,9 @@ button {
     padding: 0;
     margin: .25em;
     font-weight: bold;
+    position: absolute;
+    font-family: monospace;
+    font-size: 1.5em;
 }
 
 .removeBtn:hover {
@@ -211,6 +228,11 @@ header button {
 button:hover {
     cursor: pointer;
     color: var(--grey-text);
+}
+
+/*footer*/
+footer {
+    text-align: center;
 }
 
 /*Mobile Adjustments*/

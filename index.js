@@ -218,10 +218,11 @@ request.onupgradeneeded = (event) => {
 };
 
 function addPost(data) {
-    addToFeed(data)
-    if (data.Body == "") {
+    if (data.Body == "" && data.Image == "") {
         return
     }
+    addToFeed(data)
+
     const transaction = db.transaction(storeName, "readwrite");
     const store = transaction.objectStore(storeName);
 
