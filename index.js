@@ -183,13 +183,14 @@ request.onsuccess = (event) => {
             html = postData.Body.replace(/\r?\n/g, ' <br> ');
             state.selectedPost.querySelector('p').innerHTML = html;
 
-            const imgWrap = document.createElement('div');
-            const preview = document.createElement('img');
-            preview.id = 'imgPreview'
-            preview.src = postData.Image;
-            imgWrap.id = 'imgWrap'
-            imgWrap.append(preview);
-            state.selectedPost.querySelector('p').append(imgWrap);
+            tempDiv = document.createElement('div');
+            tempDiv.style.textAlign = "center";
+
+            postImage = document.createElement('img');
+            postImage.src = postData.Image;
+            tempDiv.append(postImage);
+            state.selectedPost.querySelector('p').append(tempDiv);
+
         } else {
             addPost({
                 Body: postIn.value, Image: state.imageStore, createdAt: Date.now(), visible: true
