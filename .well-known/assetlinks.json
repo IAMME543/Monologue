@@ -5,7 +5,7 @@
         ],
         "target": {
             "namespace": "android_app",
-            "package_name": "Monologue",
+            "package_name": "page.monologue",
             "sha256_cert_fingerprints": [
                 "C2:A6:1E:51:0C:F3:6C:51:18:EA:CB:82:21:42:BE:A6:5D:08:7C:37:E3:7F:64:9A:6E:22:61:AA:06:21:85:20"
             ]
