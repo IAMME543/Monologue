@@ -6,4 +6,11 @@
 !.env.example
 node_modules
 package-lock.json
-twa
+*.keystore
+*.jks
+build/
+*.apk
+*.aab
+*.idsig
+.gradle/
+local.properties
