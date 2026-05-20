@@ -1,5 +1,5 @@
-# Monologue
-![](https://monologue.page/assets/Monologue-icon.svg) A private, local, chronological personal microblog style journal app.
+# ![](https://monologue.page/assets/Monologue-icon.svg)  Monologue
+A private, local, chronological personal microblog style journal app.
 
 <hr>
 
