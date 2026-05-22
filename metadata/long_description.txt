@@ -1,0 +1,3 @@
+  A private, offline, local and chronological personal microblog style journal app. 
+  
+  It is served as a TWA but requires no backend or accounts as the website is static.
