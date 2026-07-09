@@ -250,6 +250,10 @@ function addPost(data) {
 
     const request = store.add(data);
 
+    request.onsuccess = (event) => {
+        data.id = event.target.result;
+    }
+
     request.onerror = (event) => {
         console.error("Add failed:", event.target.error);
     };
