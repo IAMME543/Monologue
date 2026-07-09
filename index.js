@@ -243,7 +243,7 @@ function addPost(data) {
     if (data.Body == "" && data.Image == "") {
         return
     }
-    addToFeed(data)
+
 
     const transaction = db.transaction(storeName, "readwrite");
     const store = transaction.objectStore(storeName);
@@ -252,6 +252,7 @@ function addPost(data) {
 
     request.onsuccess = (event) => {
         data.id = event.target.result;
+        addToFeed(data)
     }
 
     request.onerror = (event) => {
