@@ -33,7 +33,7 @@ def twaManifest = [
     navigationDividerColor: '#000000', // The navbar divider color.
     navigationDividerColorDark: '#000000', // The dark navbar divider color.
     backgroundColor: '#FFFFFF', // The color used for the splash screen background.
-    enableNotifications: false, // Set to true to enable notification delegation.
+    enableNotifications: true, // Set to true to enable notification delegation.
     // Every shortcut must include the following fields:
     // - name: String that will show up in the shortcut.
     // - short_name: Shorter string used if |name| is too long.
@@ -57,8 +57,8 @@ android {
         applicationId "page.monologue"
         minSdkVersion 21
         targetSdkVersion 35
-        versionCode 1
-        versionName "1"
+        versionCode 7
+        versionName "v1.0.1"
 
         // The name for the application
         resValue "string", "appName", twaManifest.name
@@ -152,8 +152,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
-            shrinkResources false
+            minifyEnabled true
         }
     }
     compileOptions {
@@ -202,6 +201,9 @@ task generateShorcutsFile {
 
 preBuild.dependsOn(generateShorcutsFile)
 
+repositories {
+    
+}
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
